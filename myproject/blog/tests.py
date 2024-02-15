@@ -1,3 +1,6 @@
 from django.test import TestCase
+from .forms import PostForm
 
-# Create your tests here.
+def post_new(request):
+    form = PostForm()
+    return render(request, 'blog/post_edit.html', {'form': form})
