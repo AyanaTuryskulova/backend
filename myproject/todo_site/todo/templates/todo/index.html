@@ -72,13 +72,18 @@ text-overflow: ellipsis;
 		{% csrf_token %}
 		<button value="remove" type="submit" class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-trash"></span>  remove</button>
 		</form>
+		<br />
+		<form action="/edit/{{i.id}}" method="GET" style=" padding-right: 4%; padding-bottom: 3%;">
+		{% csrf_token %}
+		<button value="edit" type="submit" class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-edit"></span>  edit</button>
+		</form>
 	</div>
 	{% endfor%}
 	</div>
 	<div class="col-md-1"> </div>
 	<div class="col-md-3" >
 	<div class="submit_form">
-	<form method="POST">
+	<form method="POST">	
 		{% csrf_token %}
 		{{forms}}
 		<center>

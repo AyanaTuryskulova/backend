@@ -33,3 +33,17 @@ def remove(request, item_id):
 	item.delete()
 	messages.info(request, "item removed !!!")
 	return redirect('todo')
+
+def edit(request, item_id):
+	item = Todo.objects.get(id=item_id)
+	if request.method == "GET":
+		form = TodoForm(data={'title':item.title, 'details': item.details, 'date': item.date})
+		return render (request, 'todo/edit-todolist.html', {'item': item, 'form': form})
+	if request.method == "POST":
+		form = TodoForm(data = request.POST)
+		if form.is_valid ():
+			item.title = form.data.get('title', item.title)
+			item.details = form.data.get('details', item.details)
+			item.date = form.data.get('date', item.date)
+			item.save()
+			return redirect(to ='todo')
